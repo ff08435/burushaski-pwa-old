@@ -128,28 +128,35 @@ export default function SentenceCard({
         </div>
       )}
 
-      {/* 🎧 Playback */}
-      {!isRecorded && audioUrl && (
-        <div className="space-y-2">
-          <audio controls src={audioUrl} />
+      // 🎧 Playback
+{!isRecorded && audioUrl && (
+  <div className="space-y-2">
+    <audio
+      controls
+      src={audioUrl}
+      onPlay={() => {
+        // Explicitly log to confirm user trigger
+        console.log("Audio playback triggered");
+      }}
+    />
+    <div className="space-x-2">
+      <button
+        onClick={handleReset}
+        className="px-3 py-1 border rounded"
+      >
+        Re-record
+      </button>
 
-          <div className="space-x-2">
-            <button
-              onClick={handleReset}
-              className="px-3 py-1 border rounded"
-            >
-              Re-record
-            </button>
+      <button
+        onClick={submit}
+        className="px-3 py-1 bg-green-600 text-white rounded"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+)}
 
-            <button
-              onClick={submit}
-              className="px-3 py-1 bg-green-600 text-white rounded"
-            >
-              Submit
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* ✅ Completed status */}
       {isRecorded && (
