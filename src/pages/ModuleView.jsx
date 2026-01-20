@@ -1,5 +1,4 @@
-//module view
-import { useParams, Navigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSentences } from "../hooks/useSentences";
 import SentenceCard from "../Components/SentenceCard";
@@ -7,7 +6,6 @@ import { db } from "../db/indexdb";
 import { useUser } from "../context/UserContext";
 import ProgressBar from "../Components/ProgressBar";
 import { useNavigate } from "react-router-dom";
-
 
 export default function ModuleView() {
   const params = useParams();
@@ -17,9 +15,6 @@ export default function ModuleView() {
   const data = useSentences();
   const { user, loading } = useUser();
   const [completed, setCompleted] = useState([]);
-
-
-
 
   // 🚨 Route guard (THIS FIXES BLANK SCREEN)
   if (!moduleId) {
@@ -55,13 +50,15 @@ export default function ModuleView() {
 
   return (
     <div className="p-6 space-y-4">
-      <h1 className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
+      {/* Back button */}
       <button
-      onClick={() => navigate("/dashboard")}
-      className="flex items-center gap-2 text-sm text-yellow-400 hover:text-yellow-300 mb-2"
-    >
-      ← Back to Dashboard
-    </button>
+        onClick={() => navigate("/dashboard")} // Navigate to dashboard
+        className="flex items-center gap-2 text-sm text-yellow-400 hover:text-yellow-300 mb-2"
+      >
+        ← Back to Dashboard
+      </button>
+
+      <h1 className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
         {module.title}
       </h1>
 
